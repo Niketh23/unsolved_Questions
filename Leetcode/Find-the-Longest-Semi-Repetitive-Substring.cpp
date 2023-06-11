@@ -1,3 +1,4 @@
+//Brute force solution
 class Solution {
 public:
     bool isvalid(string &s1){
@@ -19,6 +20,29 @@ public:
                     ans = max(ans,j-i+1);
                 }
             }
+        }
+        return ans;
+    }
+};
+
+// Optimal solution
+class Solution {
+public:
+    int longestSemiRepetitiveSubstring(string s) {
+        int left = 0;
+        int ans = 1;
+        int count = 0;
+        for(int right=1;right<s.length();right++){
+            if(s[right]==s[right-1]){
+                count++;
+            }
+            while(count>1){
+                if(s[left]==s[left+1]){
+                    count-=1;
+                }
+                left+=1;
+            }
+            ans = max(ans,right-left+1);
         }
         return ans;
     }
